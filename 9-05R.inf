@@ -107,8 +107,7 @@ Object Bedroom "Спальня"
   description "Спальня очень скромная, грязное бельё раскидано по полу. Чистая одежда, должно быть, висит в шкафу.
   Ванная располагается на юге, а восточная дверь ведёт в гостиную.",
   before [;
-    Smell:
-      "В комнате воняет мертвечиной";
+    Smell: "В комнате воняет мертвечиной";
   ]
   has light;
 
@@ -189,7 +188,7 @@ Object -> -> -> driver_s_license "водительск/ие прав/а"
     Фотографии на водительские правах обычно получаются далеко не лестными, и эта не стала исключением, но даже она выглядит намного лучше, чем ты сейчас.",
   has pluralname;
 
-Object -> -> -> ID_card "идентификационн/ая карточк/а" 
+Object -> -> -> ID_card "идентификационн/ая карточк/а"
   with name 'идентификационн' 'карточк' 'магнитн' 'полоск' 'полос',
   description "По размеру и форме напоминает кредитную карту, но на обратной стороне у неё магнитная полоска, а на лицевой надпись:^^
     БРАЙАН ХЭДЛИ^
@@ -225,7 +224,7 @@ Object -> corpse "труп/"
 
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 ! Ванная
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! 
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 Object Bathroom "Ванная"
   with n_to Bedroom,
@@ -239,7 +238,8 @@ Object -> toilet "туалет/"
     Enter:
       if (self hasnt general) {
         give self general;
-        "Хорошая идея. Через некоторое время, слив воду, ты чувствуешь себя намного лучше.";}
+        "Хорошая идея. Через некоторое время, слив воду, ты чувствуешь себя намного лучше.";
+      }
       else
         "Тебе уже не нужно.";
   ],
@@ -288,7 +288,7 @@ Object Living_room "Гостиная"
   w_to bedroom_door,
   has light;
 
-Object -> bedroom_door "двер/ь спальни" 
+Object -> bedroom_door "двер/ь спальни"
   with name 'спальн' 'двер',
   door_to Bedroom,
   door_dir w_to,
@@ -317,7 +317,7 @@ Object -> lock "зам/о/к"
   description "Замок сломан.",
   has scenery male;
 
-Object -> furniture "мебел/ь" 
+Object -> furniture "мебел/ь"
   with name 'мебел' 'диван' 'стол' 'столик' 'стул' 'стулья',
   before [;
     Enter: "На это нет времени.";
@@ -335,7 +335,7 @@ Object Kitchenette "Кухня"
   description "У тебя совсем нет время искать еду и готовить себе вкусный завтрак прямо сейчас. Лучше действовать в темпе. Выход на западе.",
   has light;
 
-Object -> counter "стойк/а" 
+Object -> counter "стойк/а"
   with name 'стойк',
   description "Огнеупорная пластмасса.",
   has scenery supporter female;
@@ -389,14 +389,14 @@ Object Driveway "Дорога"
   ],
   has light;
 
-Object -> car "машин/а" 
+Object -> car "машин/а"
   with name 'машин' 'авто' 'автомобил',
   before [;
     Open, Unlock:
       if (noun == keys) {
         "Ты открываешь дверь машины.";
       }
-     
+    
     Enter:
       if (keys notin player) {
         "Машина заперта.";
@@ -471,7 +471,7 @@ Object Driving "Поездка"
   ],
   has light;
 
-Object -> car2 "машин/а" 
+Object -> car2 "машин/а"
   with name 'машин' 'авто' 'автомобил',
   before [;
     Enter:
@@ -537,7 +537,7 @@ Object -> back_door "входн/ая дверь"
   description "Стеклянная дверь с надписью «ДОХВ ЙЫНБЕЖУЛС».",
   has scenery female;
 
-Object -> Bowman_s_door "дверь Боумэна" 
+Object -> Bowman_s_door "дверь Боумэна"
   with name 'двер' 'боумэна',
   before [;
     Open, Enter: Bowman_room(); return true;
@@ -563,9 +563,10 @@ Object -> -> -> form "бланк/"
   with name 'бланк' 'форму',
   before [;
     Sign:
-      if (self hasnt general && pen in player)
-        {give self general;
-        "Ты подписываешь бумагу.";}
+      if (self hasnt general && pen in player) {
+      	give self general;
+        "Ты подписываешь бумагу.";
+      }
       if (self hasnt general)
         "Тебе нечем его подписать.";
       else
@@ -591,6 +592,7 @@ Object -> -> -> note "записк/а"
 
 !============================================================================
 ! Entry point routines
+!============================================================================
 
 [ Initialise;
   print "^^^Телефон звонит.^^
@@ -599,7 +601,7 @@ Object -> -> -> note "записк/а"
 
   lookmode = 2;
   SetTime(60 * 9 + 5, 1);
- 
+
 !  location = driveway;
 !  move keys to player;
 !  rtrue;
@@ -611,6 +613,7 @@ Object -> -> -> note "записк/а"
 
 !============================================================================
 ! Stanard and extended grammar
+!============================================================================
 
 Include "RussiaG";
 
@@ -627,5 +630,5 @@ Verb "умыться"
 Extend only "ех" "езж" first
   * -> Drive;
 
-[ DriveSub; 
+[ DriveSub;
 ];
